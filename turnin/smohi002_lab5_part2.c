@@ -79,7 +79,7 @@ int main(void) {
 
 	state = start;
     while (1) {
-	tmpA = PINA;
+	tmpA = ~PINA;
 	Tick();	
 
     }

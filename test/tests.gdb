@@ -40,235 +40,55 @@ echo Running all tests..."\n\n
 
 # Add tests below
 
-# Test 1
-test "All possible paths tested & increment on 0x09"
-set state = Init
+#Test 1 empty
+test "PINA: 0x00 => PORTC: 0x40"
 setPINA 0x00
 continue 5
-expect state wait
-setPINA 0x00
-continue 5
-expect state wait
-setPINA 0x01
-continue 5
-expect state waitInc
-expectPORTC 0x08
-setPINA 0x01
-continue 5
-expect state waitInc
-setPINA 0x00
-continue 5 
-expect state wait
-setPINA 0x01
-continue 5
-expect state waitInc
-expectPORTC 0x09
-setPINA 0x00
-continue 5
-expect state wait
-expectPORTC 0x09
-setPINA 0x01
-continue 5
-expect state waitInc
-expectPORTC 0x09
-setPINA 0x03
-continue 5
-expect state waitReset
-setPINA 0x00
-continue 5
-expect state wait
-checkResult
+expectPORTC 0x40
+checkresult
 
-# Test 2
-test "PINA: 0x03 => PORTC: 0, state: wait"
-set state = Init
-setPINA 0x03
+#Range 2
+test "PINA: 0x31 => PORTC: 0x60"
+setPINA 0x31
 continue 5
-expect state waitReset
-expectPORTC 0x00
-checkResult
+expectPORTC 0x60
+checkresult
 
-# Test 3
-test "PINA: 0x01 => PORTC: 8, state: waitInc"
-set state = Init
-setPINA 0x01
+#Range 3
+test "PINA: 0x34 => PORTC: 0x70"
+setPINA 0x34
 continue 5
-expect state waitInc
-expectPORTC 0x08
-checkResult
+expectPORTC 0x70
+checkresult
 
-# Test 4
-test "PINA: 0x02 => PORTC: 6, state: waitDec"
-set state = Init
-setPINA 0x02
+#Range 4
+test "PINA: 0x25 => PORTC: 0x38"
+setPINA 0x25
 continue 5
-expect state waitDec
-expectPORTC 0x06
-checkResult
+expectPORTC 0x38
+checkresult
 
-# Test 5
-test "Decrement on 0x00"
-set state = Init
-setPINA 0x02
+#Range 5
+test "PINA: 0x48 => PORTC: 0x3C"
+setPINA 0x48
 continue 5
-expectPORTC 0x06
-expect state waitDec
-setPINA 0x00
-continue 5
-expect state wait
-setPINA 0x02
-continue 5
-expectPORTC 0x05
-expect state waitDec
-setPINA 0x00
-continue 5
-expect state wait
-setPINA 0x03
-continue 5
-expectPORTC 0x00
-expect state waitReset
-setPINA 0x00
-continue 5
-expectPORTC 0x00
-expect state wait
-setPINA 0x02
-continue 5
-expectPORTC 0x00
-expect state waitDec
-#setPINA 0x00
-#continue 5
-#expectPORTB 0x01
-#expect state waitRise1
-#setPINA 0x01
-#continue 5
-#expectPORTB 0x02
-#expect state waitFall1
-checkResult
+expectPORTC 0x3C
+checkresult
 
-# Test 6
-test "PINA: 0x00, 0x02, 0x00, 0x02, 0x00, 0x01, 0x00, 0x01, 0x00, 0x01 => PORTC: 0x08, state: waitInc"
-set state = Init
-setPINA 0x00
+#Range 6
+test "PINA: 0x5A => PORTC: 0x3E"
+setPINA 0x5A
 continue 5
-expectPORTC 0x07
-expect state wait
-setPINA 0x02
-continue 5
-expect state waitDec
-setPINA 0x00
-continue 5
-expectPORTC 0x06
-expect state wait
-setPINA 0x02
-continue 5
-expect state waitDec
-setPINA 0x00
-continue 5
-expectPORTC 0x05
-expect state wait
-setPINA 0x01
-continue 5
-expect state waitInc
-setPINA 0x00
-continue 5
-expectPORTC 0x06
-expect state wait
-setPINA 0x01
-continue 5
-expect state waitInc
-setPINA 0x00
-continue 5
-expectPORTC 0x07
-expect state wait
-setPINA 0x01
-continue 5
-expect state waitInc
-setPINA 0x00
-continue 5
-expectPORTC 0x08
-expect state wait
-checkResult
+expectPORTC 0x3E
+checkresult
 
-# Test 7
-test "PINA: 0x03, Inc to max => PORTC: 0x09, state: waitInc"
-setPINA 0x03
+#Range 7 (max)
+test "PINA: 0x7F => PORTC: 0x3F"
+setPINA 0x7F
 continue 5
-expect state waitReset
-setPINA 0x00
-continue 5
-expectPORTC 0x00
-expect state wait
-setPINA 0x01
-continue 5
-expect state waitInc
-setPINA 0x00
-continue 5
-expectPORTC 0x01
-expect state wait
-setPINA 0x01
-continue 5
-expect state waitInc
-setPINA 0x00
-continue 5
-expectPORTC 0x02
-expect state wait
-setPINA 0x01
-continue 5
-expect state waitInc
-setPINA 0x00
-continue 5
-expectPORTC 0x03
-expect state wait
-setPINA 0x01
-continue 5
-expect state waitInc
-setPINA 0x00
-continue 5
-expectPORTC 0x04
-expect state wait
-setPINA 0x01
-continue 5
-expect state waitInc
-setPINA 0x00
-continue 5
-expectPORTC 0x05
-expect state wait
-setPINA 0x01
-continue 5
-expect state waitInc
-setPINA 0x00
-continue 5
-expectPORTC 0x06
-expect state wait
-setPINA 0x01
-continue 5
-expect state waitInc
-setPINA 0x00
-continue 5
-expectPORTC 0x07
-expect state wait
-setPINA 0x01
-continue 5
-expect state waitInc
-setPINA 0x00
-continue 5
-expectPORTC 0x08
-expect state wait
-setPINA 0x01
-continue 5
-expect state waitInc
-setPINA 0x00
-continue 5
-expectPORTC 0x09
-expect state wait
-setPINA 0x01
-continue 5
-expect state waitInc
-setPINA 0x00
-continue 5
-expectPORTC 0x09
-expect state wait
-checkResult
+expectPORTC 0x3F
+checkresult
+
 
 # Report on how many tests passed/tests ran
 set $passed=$tests-$failed
