@@ -1,7 +1,7 @@
 /*	Author: Sana
  *  Partner(s) Name: 
  *	Lab Section:
- *	Assignment: Lab # 5 Exercise #
+ *	Assignment: Lab # 5 Exercise #2
  *	Exercise Description: [optional - include for your own benefit]
  *
  *	I acknowledge all content contained herein, excluding template or example
@@ -26,10 +26,10 @@ void Tick() {
 			PORTC = 0x00;
 			break;
 		case wait:
-			if (tmpA == 0x03) {	 state = reset;}
+			if (tmpA == 0x00) {	 state = wait;}
 			else if (tmpA == 0x01) { state = inc;}
 			else if (tmpA == 0x02) { state = dec;}
-			else 		       {  state = wait;}
+			else 		       {  state = reset;}
 			break;
 		case dec:
 			state = waitDec;
@@ -37,7 +37,6 @@ void Tick() {
 		case waitDec:
 			if (tmpA == 0x02) {	 state = waitDec;}
 			else if (tmpA == 0x03) { state = reset;}
-
 			else {			 state = wait;}
 			break;
 		case inc:
@@ -84,5 +83,5 @@ int main(void) {
 	Tick();	
 
     }
-//    return 1;
+	return 1;
 }
