@@ -12,36 +12,76 @@
 #include "simAVRHeader.h"
 #endif
 
+enum States {start, Init, wait, dec, waitDec, inc, waitInc, reset, waitReset} state;
+
+      unsigned char tmpA;
+
+void Tick() {
+	switch(state) {
+		case start:
+			state = Init;
+			break;
+		case Init:
+			state = wait;
+			PORTC = 0x00;
+			break;
+		case wait:
+			if (tmpA == 0xFC) {	 state = reset;}
+			else if (tmpA == 0xFE) { state = inc;}
+			else if (tmpA == 0xFD) { state = dec;}
+			else 		       {  state = wait;}
+			break;
+		case dec:
+			state = waitDec;
+			break;
+		case waitDec:
+			if (tmpA == 0xFD) {	 state = waitDec;}
+			else if (tmpA == 0xFC) { state = reset;}
+			else {			 state = wait;}
+			break;
+		case inc:
+			state = waitInc;
+			break;
+		case waitInc:
+			if (tmpA == 0xFE) {	 state = waitInc;}
+                        else if (tmpA == 0xFC) { state = reset;}
+			else { 			 state = wait;}
+                        break;
+		case reset:
+			state = waitReset;
+			break;
+		case waitReset:
+			if (tmpA == 0xFC) { state = waitReset;}
+			else {		    state = wait;}
+                        break;
+		default:
+			PORTC = 0x00;
+			state = start;
+			break;
+	};
+	switch(state) {
+		case Init:					break;
+		case wait:					break;
+		case dec:	if (PORTC != 0x00) {PORTC--;}	break;
+		case waitDec:					break;
+		case inc:	if (PORTC != 0x09) {PORTC++;}	break;
+		case waitInc:					break;
+		case reset:	PORTC = 0x00;			break;
+		case waitReset:					break;
+		default:					break;
+	};
+}
+
 int main(void) {
     /* Insert DDR and PORT initializations */
-	DDRA = 0x00; PORTA = 0xFF; //Configure A's 8 pins as outputs, initialize to 0s
-	DDRC = 0xFF; PORTC = 0x00; //Configure C's 8 pins as outputs, initialize to 0s
+	DDRA = 0x00; PORTA = 0xFF; //PORTA = input
+	DDRC = 0xFF; PORTC = 0x00; //PORTB = output
 
-	unsigned char tmpA = 0x00;
-	unsigned char tmpC = 0x00;
-
-    /* Insert your solution below */
+	state = start;
     while (1) {
-	//Read input	
-
-	tmpA = ~PINA & 0x0F;
-	tmpC = 0x40;
-
-	if ((tmpA == 0x01) || (tmpA == 0x02))
-		tmpC = 0x60;
-	else if ((tmpA == 0x03) || (tmpA == 0x04))
-                tmpC = 0x70;
-	else if ((tmpA == 0x05) || (tmpA == 0x06))
-                tmpC = 0x38;
-	else if ((tmpA == 0x07) || (tmpA == 0x08) || (tmpA == 0x09))
-                tmpC = 0x3C;
-	else if ((tmpA == 0x0A) || (tmpA == 0x0B) || (tmpA == 0x0C))
-                tmpC = 0x3E;
-	else if ((tmpA == 0x0D) || (tmpA == 0x0E) || (tmpA == 0x0F))
-                tmpC = 0x3F;
-
-	PORTC = tmpC;
+	tmpA = ~PINA;
+	Tick();	
 
     }
-    return 1;
+//    return 1;
 }
