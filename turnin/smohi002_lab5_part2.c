@@ -149,7 +149,6 @@ void Tick() {
 }
 
 int main(void) {
-    /* Insert DDR and PORT initializations */
 	DDRA = 0x00; PORTA = 0xFF; //PORTA = input
 	DDRC = 0xFF; PORTC = 0x00; //PORTB = output
 	tmpC = 0x00;
