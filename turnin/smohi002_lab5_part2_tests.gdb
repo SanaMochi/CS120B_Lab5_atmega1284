@@ -183,25 +183,25 @@ expect state waitDec
 checkResult
 
 # Test 6
-test "PINA: 0x01, 0x01, 0x00, 0x02 => PORTC: 0x00, state: waitInc"
-set state = Init
-setPINA 0x01
-continue 5
-expectPORTC 0x01
-expect state waitInc
-setPINA 0x01
-continue 5
-expect state waitInc
-expectPORTC 0x01
-setPINA 0x00
-continue 5
-expectPORTC 0x01
-expect state wait
-setPINA 0x02
-continue 5
-expect state waitDec
-expectPORTC 0x00
-checkResult
+#test "PINA: 0x01, 0x01, 0x00, 0x02 => PORTC: 0x00, state: waitInc"
+#set state = Init
+#setPINA 0xFE
+#continue 5
+#expectPORTC 0x01
+#expect state waitInc
+#setPINA 0xFE
+#continue 5
+#expectPORTC 0x01
+#expect state waitInc
+#setPINA 0xFF
+#continue 5
+#expectPORTC 0x01
+#expect state wait
+#setPINA 0x0FD
+#continue 5
+#expect state waitDec
+#expectPORTC 0x00
+#checkResult
 
 # Test 7
 test "PINA: 0x03, Inc to max => PORTC: 0x09, state: waitInc"

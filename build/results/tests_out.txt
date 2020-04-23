@@ -80,58 +80,57 @@ Running all tests..."
 "PINA: 0x02 => PORTC: 6, state: waitDec"...
 	Expected waitDec but got state:2"Decrement on 0x00"...
 	Expected waitDec but got state:2
-	Expected waitDec but got state:2"PINA: 0x01, 0x01, 0x00, 0x02 => PORTC: 0x00, state: waitInc"...
+	Expected waitDec but got state:2"PINA: 0x01, 0x01, 0x00, 0x02 => PORTC: 0x00, state: waitInc"..."PINA: 0x03, Inc to max => PORTC: 0x09, state: waitInc"...
+	Expected waitReset but got state:4
+	Expected wait but got state:4
+	Expected waitInc but got state:4
 	Expected 0x01 
 	PORTC '0x800028:	0x00
 
-	Expected waitInc but got state:2
-	Expected waitInc but got state:2
-	Expected 0x01 
-	PORTC '0x800028:	0x00
-
-	Expected 0x01 
-	PORTC '0x800028:	0x00
-
-	Expected waitDec but got state:2"PINA: 0x03, Inc to max => PORTC: 0x09, state: waitInc"...
-	Expected waitReset but got state:2
-	Expected waitInc but got state:2
-	Expected 0x01 
-	PORTC '0x800028:	0x00
-
-	Expected waitInc but got state:2
+	Expected wait but got state:4
+	Expected waitInc but got state:4
 	Expected 0x02 
 	PORTC '0x800028:	0x00
 
-	Expected waitInc but got state:2
+	Expected wait but got state:4
+	Expected waitInc but got state:4
 	Expected 0x03 
 	PORTC '0x800028:	0x00
 
-	Expected waitInc but got state:2
+	Expected wait but got state:4
+	Expected waitInc but got state:4
 	Expected 0x04 
 	PORTC '0x800028:	0x00
 
-	Expected waitInc but got state:2
+	Expected wait but got state:4
+	Expected waitInc but got state:4
 	Expected 0x05 
 	PORTC '0x800028:	0x00
 
-	Expected waitInc but got state:2
+	Expected wait but got state:4
+	Expected waitInc but got state:4
 	Expected 0x06 
 	PORTC '0x800028:	0x00
 
-	Expected waitInc but got state:2
+	Expected wait but got state:4
+	Expected waitInc but got state:4
 	Expected 0x07 
 	PORTC '0x800028:	0x00
 
-	Expected waitInc but got state:2
+	Expected wait but got state:4
+	Expected waitInc but got state:4
 	Expected 0x08 
 	PORTC '0x800028:	0x00
 
-	Expected waitInc but got state:2
+	Expected wait but got state:4
+	Expected waitInc but got state:4
 	Expected 0x09 
 	PORTC '0x800028:	0x00
 
-	Expected waitInc but got state:2
+	Expected wait but got state:4
+	Expected waitInc but got state:4
 	Expected 0x09 
 	PORTC '0x800028:	0x00
-======================================================
+
+	Expected wait but got state:4======================================================
 Remote doesn't know how to detach

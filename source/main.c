@@ -39,22 +39,22 @@ void Tick() {
 			state = waitDec;
 			break;
 		case waitDec:
-			if (tmpA == 0x02) {	 state = waitDec;}
+			if (tmpA == 0x00) {	 state = wait;}
 			else if (tmpA == 0x03) { state = reset;}
 
 //			if (tmpA == 0xFD) {	 state = waitDec;}
 //			else if (tmpA == 0xFC) { state = reset;}
-			else {			 state = wait;}
+			else {			 state = waitDec;}
 			break;
 		case inc:
 			state = waitInc;
 			break;
 		case waitInc:
-			if (tmpA == 0x01) {	 state = waitInc;}
+			if (tmpA == 0x00) {	 state = wait;}
 			else if (tmpA == 0x03) { state = reset;}
 //			if (tmpA == 0xFE) {	 state = waitInc;}
 //			else if (tmpA == 0xFC) { state = reset;}
-			else {			 state = wait;}
+			else {			 state = waitInc;}
                         break;
 		case reset:
 			state = waitReset;
