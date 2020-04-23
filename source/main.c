@@ -29,39 +29,30 @@ void Tick() {
 			if (tmpA == 0x03) {	 state = reset;}
 			else if (tmpA == 0x01) { state = inc;}
 			else if (tmpA == 0x02) { state = dec;}
-			
-//			if (tmpA == 0xFC) {	 state = reset;}
-//			else if (tmpA == 0xFE) { state = inc;}
-//			else if (tmpA == 0xFD) { state = dec;}
 			else 		       {  state = wait;}
 			break;
 		case dec:
 			state = waitDec;
 			break;
 		case waitDec:
-			if (tmpA == 0x00) {	 state = wait;}
+			if (tmpA == 0x02) {	 state = waitDec;}
 			else if (tmpA == 0x03) { state = reset;}
 
-//			if (tmpA == 0xFD) {	 state = waitDec;}
-//			else if (tmpA == 0xFC) { state = reset;}
-			else {			 state = waitDec;}
+			else {			 state = wait;}
 			break;
 		case inc:
 			state = waitInc;
 			break;
 		case waitInc:
-			if (tmpA == 0x00) {	 state = wait;}
+			if (tmpA == 0x01) {	 state = waitInc;}
 			else if (tmpA == 0x03) { state = reset;}
-//			if (tmpA == 0xFE) {	 state = waitInc;}
-//			else if (tmpA == 0xFC) { state = reset;}
-			else {			 state = waitInc;}
+			else {			 state = wait;}
                         break;
 		case reset:
 			state = waitReset;
 			break;
 		case waitReset:
 			if (tmpA == 0x03) { state = waitReset;}
-//			if (tmpA == 0xFC) { state = waitReset;}
 			else {		    state = wait;}
                         break;
 		default:
@@ -89,7 +80,7 @@ int main(void) {
 
 	state = start;
     while (1) {
-	tmpA = ~PINA;
+	tmpA = ~PINA & 0x03;
 	Tick();	
 
     }
