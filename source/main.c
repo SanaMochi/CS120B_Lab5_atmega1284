@@ -80,7 +80,7 @@ int main(void) {
 	state = start;
 
 	while (1) {
-		tmpA = PINA & 0x01;
+		tmpA = ~PINA & 0x01;
 		Tick();
 	}
 }
